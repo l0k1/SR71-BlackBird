@@ -386,7 +386,13 @@ This a mistake There is not any probe should  be deleted into the .ac  model-->
         </axis>
  </animation>
 
-
-
+    <multiplay>
+        <refuel>
+            <offset-x-m type="double">-8.9513</offset-x-m>
+            <offset-y-m type="double">0.0</offset-y-m>
+            <offset-z-m type="double">1.60</offset-z-m>
+            <type type="string">boom</type>
+        </refuel>
+    </multiplay>
 
 </PropertyList>
