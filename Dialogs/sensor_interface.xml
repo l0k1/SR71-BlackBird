@@ -1,0 +1,110 @@
+<PropertyList>
+
+	<name>weapons</name>
+	<modal>false</modal>
+	<layout>vbox</layout>
+ 
+	<text>
+		<label>Side-Looking Radar</label>
+	</text>
+	
+	<text>
+		<label></label>
+	</text>
+	
+	<group>
+		<layout>vbox</layout>
+		<button>
+			<legend>Start SLR Recording</legend>
+			<default>true</default>
+			<pref-width>180</pref-width>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/sensors/recording</property>
+				<value>1</value>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+		<button>
+			<legend>Stop SLR Recording</legend>
+			<default>true</default>
+			<pref-width>180</pref-width>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/sensors/recording</property>
+				<value>0</value>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+		<button>
+			<legend>Point SLR Left</legend>
+			<default>true</default>
+			<pref-width>180</pref-width>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/sensors/slr/side</property>
+				<value>left</value>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+		<button>
+			<legend>Point SLR Right</legend>
+			<default>true</default>
+			<pref-width>180</pref-width>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/sensors/slr/side</property>
+				<value>right</value>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+		<button>
+			<legend>Set Narrow Width</legend>
+			<default>true</default>
+			<pref-width>180</pref-width>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/sensors/slr/width</property>
+				<value>narrow</value>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+		<button>
+			<legend>Set Wide Width</legend>
+			<default>true</default>
+			<pref-width>180</pref-width>
+			<binding>
+				<command>property-assign</command>
+				<property>/controls/sensors/slr/width</property>
+				<value>wide</value>
+			</binding>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+	</group>
+	
+	<text>
+		<label></label>
+	</text>
+    
+  <hrule/>
+  
+  <button>
+    <legend>Close</legend>
+    <binding>
+     <command>dialog-close</command>
+    </binding>
+   </button>
+
+</PropertyList>
