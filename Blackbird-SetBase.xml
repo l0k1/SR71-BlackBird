@@ -46,12 +46,29 @@
 				</engine>
 			</engines>
 		</failure-manager>
+		
+
+		<menubar>
+			<default>
+				<menu n="10">
+					<label>SR-71</label>
+					<enabled type="bool">true</enabled>
+					<item n="0">
+						<label>Sensor Interface</label>
+						<binding>
+							<command>nasal</command>
+							<script>sensors.sensors_dialog.open()</script>
+						</binding>
+					</item>
+				</menu>
+			</default>
+		</menubar>
+		
         <help include="Help/BlackBird-help.xml"/>
     </sim>
 
     <input include="Inputs/Blackbird-input.xml"/>
-
-
+	
     <environment>
         <params>
             <control-fdm-atmosphere type="bool">false</control-fdm-atmosphere>
@@ -97,7 +114,29 @@
         <jettison>
             <canopy type="float">0</canopy>
         </jettison>
-
+		<sensors>
+			<recording type="bool">0</recording> <!-- turns recording on or off -->
+			<mode type="string">SLR</mode> <!-- possible modes (for now) are SLR and OBC -->
+			<log-count type="int">0</log-count>
+			<ready-write type="bool">0</ready-write>
+			<!-- OBC -->
+			<obc>
+				<output-rate type="int">10</output-rate>
+				<exposures-remaining type="int">350</exposures-remaining>
+			</obc>
+			<!-- SLR -->
+			<slr>
+				<output-rate type="int">5</output-rate>
+				<exposures-remaining type="int">800</exposures-remaining>
+				<mode type="string">manual</mode>
+				<operate type="string">cold</operate>
+				<stab type="string">r</stab>
+				<srv type="string">r</srv>
+				<start-range type="int">10</start-range>
+				<side type="string">left</side>
+				<width type="string">narrow</width>
+			</slr>
+		</sensors>
     </controls>
 
     <engines>
@@ -211,9 +250,15 @@
             <consumable>
                 <file>Aircraft/SR71-BlackBird/Nasal/tanker.nas</file>
             </consumable>
-            <radar>
+            <!--<radar>
                 <file>Aircraft/SR71-BlackBird/Nasal/radar.nas</file>
-            </radar>
+            </radar>-->
+			<radar_logic>
+				<file>Aircraft/SR71-BlackBird/Nasal/radar-logic.nas</file>
+			</radar_logic>
+			<sensors>
+				<file>Aircraft/SR71-BlackBird/Nasal/sensor_control.nas</file>
+			</sensors>
 			<terrain>
 				<file>Aircraft/SR71-BlackBird/Nasal/terrain.nas</file>
 			</terrain>

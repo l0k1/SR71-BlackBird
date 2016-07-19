@@ -2,7 +2,7 @@
 <PropertyList>
 
 	<path>Turbine-Outv2.ac</path>
-        <texture-path>Texture-USAF</texture-path>
+    <texture-path>Texture-USAF</texture-path>
 
 	<animation>
 		<type>rotate</type>
@@ -332,6 +332,9 @@
 		<object-name>Post-Combustion1</object-name>
 		<condition>
 				<property>sim/multiplay/generic/float[6]</property>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 		</condition>
 	</animation>
 
@@ -364,6 +367,9 @@
 		<object-name>Post-Combustion2</object-name>
 		<condition>
 				<property>sim/multiplay/generic/float[6]</property>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 		</condition>
 	</animation>
 	<animation>
@@ -383,6 +389,9 @@
 		<object-name>Post-Combustion2b</object-name>
 		<condition>
 				<property>sim/multiplay/generic/float[6]</property>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 		</condition>
 	</animation>
 	<animation>
@@ -396,7 +405,5 @@
 			<z>0</z>
 		</axis>
 	</animation>
-
-
 
 </PropertyList>

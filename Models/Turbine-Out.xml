@@ -332,6 +332,9 @@
 		<object-name>Post-Combustion1</object-name>
 		<condition>
 				<property>sim/multiplay/generic/float[5]</property>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 		</condition>
 	</animation>
 
@@ -364,6 +367,9 @@
 		<object-name>Post-Combustion2</object-name>
 		<condition>
 				<property>sim/multiplay/generic/float[5]</property>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 		</condition>
 	</animation>
 	<animation>
@@ -383,6 +389,9 @@
 		<object-name>Post-Combustion2b</object-name>
 		<condition>
 				<property>sim/multiplay/generic/float[5]</property>
+				<not>
+					<property>/sim/rendering/shaders/skydome</property>
+				</not>
 		</condition>
 	</animation>
 	<animation>

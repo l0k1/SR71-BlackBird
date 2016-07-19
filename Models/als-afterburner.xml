@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<path>thrust_flame.ac</path>
+	
+	<effect>
+        <inherits-from>Aircraft/SR71-Blackbird/Models/ab-flame</inherits-from>
+        <object-name>bounding_box</object-name>
+    </effect>
+	
+    <nopreview/>
+    <animation>
+        <type>select</type>
+        <object-name>bounding_box</object-name>
+        <condition>
+            <property>sim/multiplay/generic/float[6]</property>
+			<property>/sim/rendering/shaders/skydome</property>
+        </condition>
+    </animation>
+	
+	
+	<animation>
+		<type>scale</type>
+		<object-name>bounding_box</object-name>
+		<nopreview/>
+		<condition>
+			<greater-than>
+				<property>/controls/engines/engine[0]/throttle</property>
+				<value>0.40</value>
+			</greater-than>
+        </condition>
+		<property>/controls/engines/engine[0]/throttle</property><!-- engines/engine[0]/nozzle-pos-norm -->
+		<x-min>0.1</x-min>
+		<y-min>0.800</y-min>
+		<z-min>0.800</z-min>
+		<x-max>2.750</x-max>
+		<y-max>1.000</y-max>
+		<z-max>1.000</z-max>
+		<x-factor>2.75</x-factor>
+		<y-factor>1.0</y-factor>
+		<z-factor>1.0</z-factor>
+	</animation>
+	
+
+</PropertyList>
