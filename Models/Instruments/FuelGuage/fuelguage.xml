@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+
+
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin
+    Copyright License:  GPL
+-->
+<PropertyList>
+
+ <path>fuelguage.ac</path>
+
+    <animation>
+            <object-name>Aiguille</object-name>
+			<type>material</type>
+		<emission>
+			<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			<red>0.80</red>
+			<green>0.40</green>
+			<blue>0.30</blue>
+		</emission>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>01</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</specular>
+		<shininess> 20</shininess>
+    </animation>
+
+    <animation>
+            <object-name>Cadran</object-name>
+			<object-name>CCpcty</object-name>
+            <object-name>DCpcty</object-name>
+            <object-name>UCpcty</object-name>
+            <object-name>MCpcty</object-name>
+            <object-name>DMCpcty</object-name>
+					<type>material</type>
+		<emission>
+			<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			<red>0.60</red>
+			<green>0.30</green>
+			<blue>0.20</blue>
+		</emission>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</specular>
+		<shininess> 32</shininess>
+    </animation>
+
+
+    <animation>
+            <type>rotate</type>
+            <object-name>Aiguille</object-name>
+            <object-name>Aiguille-Fond</object-name>
+            <property>/fdm/jsbsim/propulsion/total-fuel-lbs</property>
+            <factor>0.002776470588235294118</factor>
+            <axis>
+                    <x>-1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+
+
+    <animation>
+            <type>textranslate</type>
+            <object-name>UCpcty</object-name>
+            <property>/fdm/jsbsim/propulsion/total-fuel-lbs</property>
+            <factor>0.1</factor>
+            <step>1</step>
+            <scroll>0</scroll>
+            <axis>
+                    <x>0</x>
+                    <y>-1</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+
+    <animation>
+            <type>textranslate</type>
+            <object-name>DCpcty</object-name>
+           <property>/fdm/jsbsim/propulsion/total-fuel-lbs</property>
+            <factor>0.01</factor>
+            <step>10</step>
+            <scroll>0</scroll>
+            <axis>
+                    <x>0</x>
+                    <y>-1</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+
+    <animation>
+            <type>textranslate</type>
+            <object-name>CCpcty</object-name>
+          <property>/fdm/jsbsim/propulsion/total-fuel-lbs</property>
+            <factor>0.001</factor>
+            <step>100</step>
+            <scroll>0</scroll>
+            <axis>
+                    <x>0</x>
+                    <y>-1</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+
+    <animation>
+            <type>textranslate</type>
+            <object-name>MCpcty</object-name>
+          <property>/fdm/jsbsim/propulsion/total-fuel-lbs</property>
+            <factor>0.0001</factor>
+            <step>1000</step>
+            <scroll>0</scroll>
+            <axis>
+                    <x>0</x>
+                    <y>-1</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+
+    <animation>
+            <type>textranslate</type>
+            <object-name>DMCpcty</object-name>
+          <property>/fdm/jsbsim/propulsion/total-fuel-lbs</property>
+            <factor>0.00001</factor>
+            <step>10000</step>
+            <scroll>0</scroll>
+            <axis>
+                    <x>0</x>
+                    <y>-1</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+
+
+</PropertyList>
