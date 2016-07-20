@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin
+    Copyright License:  GPL
+-->
+<PropertyList>
+
+	<path>radar-base.ac</path>
+	
+	<animation>
+		<type>pick</type>
+		<object-name>pilotNavDisplay</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>nasal</command>
+				<script>nav_display.showNd();</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<object-name>pilotNavDisplaydefault</object-name>
+		<type>select</type>
+		<condition>
+			<less-than>
+				<property>systems/electrical/outputs/efis</property>
+				<value>5</value>
+			</less-than>
+		</condition>
+	</animation>
+	
+<!--	<panel>
+		<path>Aircraft/SR71-BlackBird/Instruments/EHSI-panel2d.xml</path>
+		<bottom-left>
+			<x-m>0.0</x-m>
+			<y-m>-0.07741</y-m>
+			<z-m>-0.0774098</z-m>
+		</bottom-left>
+		<bottom-right>
+			<x-m>0.0</x-m>
+			<y-m>0.07741</y-m>
+			<z-m>-0.0774098</z-m>
+		</bottom-right>
+		<top-left>
+			<x-m>0.00</x-m>
+			<y-m>-0.07741</y-m>
+			<z-m>0.0774098</z-m>
+		</top-left>
+	</panel>-->
+
+
+
+
+	<animation>
+		<object-name>pilotNavDisplay</object-name>
+		<type>material</type>
+		<emission>
+			<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			<red>0.60</red>
+			<green>0.30</green>
+			<blue>0.20</blue>
+		</emission>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</specular>
+		<shininess> 32</shininess>
+	</animation>
+
+<!--    <animation>
+            <type>rotate</type>
+            <object-name>Radar-range-Com</object-name>
+            <property>/instrumentation/radar/range</property>
+            <interpolation>
+                    <entry>
+                            <ind>10</ind>
+                            <dep>0</dep>
+                    </entry>
+                    <entry>
+                            <ind>20</ind>
+                            <dep>60</dep>
+                    </entry>
+                    <entry>
+                            <ind>40</ind>
+                            <dep>120</dep>
+                    </entry>
+            </interpolation>
+            <center>
+                    <x-m>0</x-m>
+                    <y-m>-0.0639756</y-m>
+                    <z-m>-0.0636857</z-m>
+            </center>
+            <axis>
+                    <x>-1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>-->
+
+<!--    <animation>
+            <type>select</type>
+            <object-name>Temoin-RefCt-Actif</object-name>
+            <condition>
+                            <equals>
+                                    <property>/systems/refuel/contact</property>
+                                    <value>1</value>
+                            </equals>
+            </condition>
+    </animation> -->
+
+
+</PropertyList>

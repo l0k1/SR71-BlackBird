@@ -217,6 +217,30 @@
 				<range type="int" archive="y">20</range>
 				<minimized type="bool" archive="y">false</minimized>
 			</radar>
+			<efis>
+				<inputs>
+					<arpt type="bool">true</arpt> <!-- show airports -->
+					<range-nm type="int">120</range-nm> <!-- range set to 120nm. May allow to be toggleable later. -->
+					<nd-centered type="bool">false</nd-centered>
+					<data type="bool">true</data>
+					<lh-vor-adf type="int">0</lh-vor-adf>
+					<rh-vor-adf type="int">0</rh-vor-adf>
+					<pos type="bool">false</pos>
+					<sta type="bool">true</sta>
+					<terr type="bool">false</terr>
+					<tfc type="bool">false</tfc>
+					<wpt type="bool">true</wpt>
+					<wxr type="bool">false</wxr>
+				</inputs>
+				<mfd>
+					<display-mode type="string">PLAN</display-mode>
+					<display-type type="string">CRT</display-type>
+					<rangearc type="bool">false</rangearc>
+					<true-north type="bool">false</true-north>
+				</mfd>
+				<hdg-trk-selected type="bool">false</hdg-trk-selected>
+				<hdg-bug-only type="bool">false</hdg-bug-only>
+			</efis>
     </instrumentation>
 	
 	
@@ -268,6 +292,9 @@
 			<damage>
 				<file>Aircraft/SR71-BlackBird/Nasal/damage.nas</file>
 			</damage>
+			<nav_display>
+				<file>Aircraft/SR71-BlackBird/Models/Instruments/NavDisplay/nd.nas</file>
+			</nav_display>
     </nasal>
 	
 	<!-- setting up properties for later -->

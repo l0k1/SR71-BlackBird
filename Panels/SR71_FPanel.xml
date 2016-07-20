@@ -7,6 +7,17 @@
 
 <!--==============Center=======================-->
     <model>
+        <name>NavDisplay</name>
+            <path>Aircraft/SR71-BlackBird/Models/Instruments/NavDisplay/navdisplay.xml</path>
+            <offsets>
+                    <x-m>-0.0238927</x-m>
+                    <y-m>0</y-m>
+                    <z-m>-0.289447</z-m>
+                    <pitch-deg>-40</pitch-deg>
+        </offsets>
+    </model>
+	
+	<!--<model>
         <name>Radar</name>
             <path>Aircraft/SR71-BlackBird/Instruments/Radar2d-bb.xml</path>
             <offsets>
@@ -15,9 +26,9 @@
                     <z-m>-0.289447</z-m>
                     <pitch-deg>-40</pitch-deg>
         </offsets>
-    </model>
+    </model>-->
 
-    <model>
+    <!--<model>
         <name>RadarDummy</name>
             <path>Aircraft/SR71-BlackBird/Instruments/Radar2d-dummy-bb.xml</path>
             <offsets>
@@ -26,9 +37,9 @@
                     <z-m>-0.289447</z-m>
                     <pitch-deg>-40</pitch-deg>
         </offsets>
-    </model>
+    </model>-->
 
-    <animation>
+    <!--<animation>
             <type>select</type>
             <object-name>Radar</object-name>
             <condition>
@@ -48,7 +59,7 @@
                             <value>26.9999</value>
                     </less-than>
             </condition>
-    </animation>
+    </animation>-->
 
     <model>
             <path>Aircraft/SR71-BlackBird/Instruments/AOA-bb.xml</path>

@@ -394,6 +394,14 @@
             </test>
             <output>/systems/electrical/outputs/gps-mfd</output>
         </switch>
+		
+		<switch name="electrical/avionic/instruments-efis">
+            <default value="0"/>
+            <test  logic="AND" value="electrical/bus/master-volts">
+                electrical/avionic/instruments-on  == 1
+            </test>
+            <output>/systems/electrical/outputs/efis</output>
+        </switch>
 
         <switch name="electrical/avionic/instruments-gps-v">
             <default value="0"/>
