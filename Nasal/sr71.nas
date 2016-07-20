@@ -12,8 +12,6 @@ var cit_path = "/fdm/jsbsim/propulsion/cit";
 setprop(engine_damage[0],0);
 setprop(engine_damage[1],0);
 
-setprop("/cit",0);
-
 #Fast updating
 var main = func () {
 	
@@ -35,12 +33,12 @@ var main = func () {
 			var y2 = 2400 / MAIN_UPDATE_TIMER; # 45 minutes at CIT of 453
 		} elsif ( cit_temp < 478 ) {
 			var x1 = 453;
-			var y1 = 3600 / MAIN_UPDATE_TIMER;
+			var y1 = 2400 / MAIN_UPDATE_TIMER;
 			var x2 = 478;
 			var y2 = 300 / MAIN_UPDATE_TIMER; # 5 minutes at CIT of 478
 		} elsif ( cit_temp >= 478 ) {
 			var x1 = 478;
-			var y1 = 3600 / MAIN_UPDATE_TIMER;
+			var y1 = 300 / MAIN_UPDATE_TIMER;
 			var x2 = 510;
 			var y2 = 1 / MAIN_UPDATE_TIMER;
 		}
