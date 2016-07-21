@@ -12,7 +12,7 @@
         <version>0.5  2011-06-013</version>
         <flight-model>jsb</flight-model>
         <startup>
-                <splash-texture>Aircraft/SR71-BlackBird/splash-BB-A.png</splash-texture>
+                <splash-texture>Aircraft/SR71-BlackBird/splash-BB-A-BT.png</splash-texture>
         </startup>
         <flight-model>jsb</flight-model>
         <aero>sr71-jsbsim</aero>
