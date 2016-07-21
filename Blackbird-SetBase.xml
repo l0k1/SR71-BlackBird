@@ -274,9 +274,6 @@
             <consumable>
                 <file>Aircraft/SR71-BlackBird/Nasal/tanker.nas</file>
             </consumable>
-            <!--<radar>
-                <file>Aircraft/SR71-BlackBird/Nasal/radar.nas</file>
-            </radar>-->
 			<radar_logic>
 				<file>Aircraft/SR71-BlackBird/Nasal/radar-logic.nas</file>
 			</radar_logic>
