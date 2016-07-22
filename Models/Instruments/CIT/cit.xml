@@ -88,7 +88,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Needle_L</object-name>
-		<property>/fdm/jsbsim/propulsion/cit</property>
+		<property>/engines/engine[0]/cit</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
@@ -213,7 +213,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Needle_R</object-name>
-		<property>/fdm/jsbsim/propulsion/cit</property>
+		<property>/engines/engine[1]/cit</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
