@@ -34,8 +34,8 @@
 		<y-min>0.800</y-min>
 		<z-min>0.800</z-min>
 		<x-max>2.750</x-max>
-		<y-max>1.000</y-max>
-		<z-max>1.000</z-max>
+		<y-max>0.950</y-max>
+		<z-max>0.950</z-max>
 		<x-factor>2.75</x-factor>
 		<y-factor>1.0</y-factor>
 		<z-factor>1.0</z-factor>
