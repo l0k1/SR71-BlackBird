@@ -4,7 +4,7 @@
 
 <system name="engine">
 
-        <property value="2.5">fcs/throttle-gain</property>
+        <property value="2.0">fcs/throttle-gain</property>
         <!--<property value="0">fcs/intake-subsonic-pos</property>-->
         <property value="0">fcs/cutoff-switch0</property>
         <property value="0">fcs/cutoff-switch1</property>
@@ -108,7 +108,7 @@
                 <input>fcs/throttle0-pos-norm</input>
                 <clipto>
                     <min>0.1</min>
-                    <max>2.5</max>
+                    <max>2.0</max>
                 </clipto>
                 <output>fcs/throttle-pos-norm[0]</output>
              </summer>
@@ -154,7 +154,7 @@
                 <input>fcs/throttle1-pos-norm</input>
                 <clipto>
                     <min>0.1</min>
-                    <max>2.5</max>
+                    <max>2.0</max>
                 </clipto>
                 <output>fcs/throttle-pos-norm[1]</output>
              </summer>
