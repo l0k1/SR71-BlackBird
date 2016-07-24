@@ -25,11 +25,11 @@
 		<nopreview/>
 		<condition>
 			<greater-than>
-				<property>/controls/engines/engine[0]/throttle</property>
-				<value>0.40</value>
+				<property>engines/engine[1]/n1</property>
+				<value>100</value>
 			</greater-than>
         </condition>
-		<property>/controls/engines/engine[0]/throttle</property><!-- engines/engine[0]/nozzle-pos-norm -->
+		<property>/controls/engines/engine[1]/throttle</property>
 		<x-min>0.1</x-min>
 		<y-min>0.800</y-min>
 		<z-min>0.800</z-min>

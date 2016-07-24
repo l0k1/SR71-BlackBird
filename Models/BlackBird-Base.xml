@@ -27,9 +27,8 @@
         </offsets>
     </model>
 
-
 	<model>
-        <path>Aircraft/SR71-BlackBird/Models/als-afterburner.xml</path>
+        <path>Aircraft/SR71-BlackBird/Models/als-afterburner-left.xml</path>
         <offsets>
                 <x-m>8.23625</x-m>
                 <y-m>-4.12792</y-m>
@@ -37,7 +36,7 @@
         </offsets>
     </model>
     <model>
-        <path>Aircraft/SR71-BlackBird/Models/als-afterburner.xml</path>
+        <path>Aircraft/SR71-BlackBird/Models/als-afterburner-right.xml</path>
         <offsets>
                 <x-m>8.23625</x-m>
                 <y-m>4.12792</y-m>
