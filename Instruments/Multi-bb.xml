@@ -119,7 +119,7 @@
             <object-name>Ueas</object-name>
             <condition>
                     <less-than>
-                        <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+                        <property>/fdm/jsbsim/velocities/ve-kts</property>
                         <value>1000</value>
                     </less-than>
             </condition>
@@ -130,7 +130,7 @@
             <object-name>Deas</object-name>
             <condition>
                     <less-than>
-                        <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+                        <property>/fdm/jsbsim/velocities/ve-kts</property>
                         <value>1000</value>
                     </less-than>
             </condition>
@@ -141,7 +141,7 @@
             <object-name>Ceas</object-name>
             <condition>
                     <less-than>
-                        <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+                        <property>/fdm/jsbsim/velocities/ve-kts</property>
                         <value>1000</value>
                     </less-than>
             </condition>
@@ -150,7 +150,7 @@
     <animation>
             <type>textranslate</type>
             <object-name>Ueas</object-name>
-            <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>/fdm/jsbsim/velocities/ve-kts</property>
             <factor>0.1</factor>
             <step>1</step>
             <scroll>0</scroll>
@@ -164,7 +164,7 @@
     <animation>
             <type>textranslate</type>
             <object-name>Deas</object-name>
-           <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>/fdm/jsbsim/velocities/ve-kts</property>
             <factor>0.01</factor>
             <step>10</step>
             <scroll>0</scroll>
@@ -178,7 +178,7 @@
     <animation>
             <type>textranslate</type>
             <object-name>Ceas</object-name>
-          <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+            <property>/fdm/jsbsim/velocities/ve-kts</property>
             <factor>0.001</factor>
             <step>100</step>
             <scroll>0</scroll>
