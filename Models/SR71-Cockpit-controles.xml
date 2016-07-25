@@ -141,7 +141,7 @@
         <interpolation>
                 <entry>
                 <ind>0</ind>
-                <dep>0</dep>
+                <dep>-10</dep>
                 </entry>
                 <entry>
                 <ind>1</ind>
@@ -167,7 +167,7 @@
         <interpolation>
                 <entry>
                 <ind>0</ind>
-                <dep>0</dep>
+                <dep>-10</dep>
                 </entry>
                 <entry>
                 <ind>1</ind>
@@ -186,7 +186,64 @@
         </axis>
     </animation>
 
+	<!-- throttle friction lever -->
+	
+	<animation>
+        <type>pick</type>
+        <object-name>Throttle-friction</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/controls/engines/friction-lever</property>
+				<step>1</step>
+				<min>0</min>
+				<max>4</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/controls/engines/friction-lever</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>4</max>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+    </animation>
+	
+	<animation>
+        <type>rotate</type>
+        <object-name>Throttle-friction</object-name>
+        <property>/controls/engines/friction-lever</property>
+        <interpolation>
+                <entry>
+                <ind>0</ind>
+                <dep>-2</dep>
+                </entry>
+                <entry>
+                <ind>4</ind>
+                <dep>-60</dep>
+                </entry>
+        </interpolation>
+        <center>
+                <x-m>-0.172948</x-m>
+                <y-m>0</y-m>
+                <z-m>0.042163</z-m>
+        </center>
+        <axis>
+                <x>0</x>
+                <y>1</y>
+                <z>0</z>
+        </axis>
+    </animation>
 
+	<!-- teb display -->
 
 
 
