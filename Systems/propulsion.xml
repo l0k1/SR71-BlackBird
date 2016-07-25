@@ -4,7 +4,7 @@
 
 <system name="engine">
 
-        <property value="2.0">fcs/throttle-gain</property>
+        <property value="2.5">fcs/throttle-gain</property>
         <!--<property value="0">fcs/intake-subsonic-pos</property>-->
         <property value="0">fcs/cutoff-switch0</property>
         <property value="0">fcs/cutoff-switch1</property>
@@ -82,21 +82,6 @@
                 </function>
             </fcs_function>
 
-            <scheduled_gain name="propulsion/engine[0]/trim-throttle">
-                <input>propulsion/engine[1]/set-running</input>
-                <table>
-                    <independentVar lookup="row">velocities/vc-kts</independentVar>
-                    <independentVar lookup="column">fcs/intake-subsonic-pos</independentVar>
-                    <tableData>
-                                    0      1
-                        0           0      0
-                        450       0      0
-                        470       4      2
-                        1000     4      2
-                    </tableData>
-                </table>
-            </scheduled_gain>
-
             <!--on reduit les gaz pour ne pas dépasser 450 kts-->
             <fcs_function name="Throttle0 Pos Norm">
                 <function>
@@ -108,7 +93,7 @@
                 <input>fcs/throttle0-pos-norm</input>
                 <clipto>
                     <min>0.1</min>
-                    <max>2.0</max>
+                    <max>2.5</max>
                 </clipto>
                 <output>fcs/throttle-pos-norm[0]</output>
              </summer>
@@ -127,21 +112,6 @@
                 </function>
             </fcs_function>
 
-            <scheduled_gain name="propulsion/engine[1]/trim-throttle">
-                <input>propulsion/engine[1]/set-running</input>
-                <table>
-                    <independentVar lookup="row">velocities/vc-kts</independentVar>
-                    <independentVar lookup="column">fcs/intake-subsonic-pos</independentVar>
-                    <tableData>
-                                     0      1
-                        0           0      0
-                        450       0      0
-                        470       4      2
-                        1000     4      2
-                    </tableData>
-                </table>
-            </scheduled_gain>
-
 
             <!--on reduit les gaz pour ne pas dépasser 450 kts-->
             <fcs_function name="Throttle1 Pos Norm">
@@ -154,7 +124,7 @@
                 <input>fcs/throttle1-pos-norm</input>
                 <clipto>
                     <min>0.1</min>
-                    <max>2.0</max>
+                    <max>2.5</max>
                 </clipto>
                 <output>fcs/throttle-pos-norm[1]</output>
              </summer>
