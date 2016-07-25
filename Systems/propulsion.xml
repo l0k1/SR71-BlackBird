@@ -58,6 +58,35 @@
                 </traverse>
             </kinematic>
 
+			
+			<!-- change throttle distribution, so that 55% is milthrust and 45% is afterburner (or something) -->
+			
+			<fcs_function name="throttle-redist[0]">
+				<function>
+					<table>
+						<independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
+						<tableData>
+							0		0
+							0.55	0.40
+							1		1
+						</tableData>
+					</table>
+				</function>
+			</fcs_function>
+			
+			<fcs_function name="throttle-redist[1]">
+				<function>
+					<table>
+						<independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
+						<tableData>
+							0		0
+							0.55	0.40
+							1		1
+						</tableData>
+					</table>
+				</function>
+			</fcs_function>
+			
             <!--la puissance maxi n'est disponible que sous condition-->
             <switch name="AugThrust">
                 <default value="1"/>
@@ -72,7 +101,7 @@
             <fcs_function name="Throttle0">
                 <function>
                     <product>
-                        <property>fcs/throttle-cmd-norm[0]</property>
+                        <property>fcs/throttle-redist[0]</property>
                         <property>fcs/cutoff-switch0-delay</property>
                         <difference>
                             <property>fcs/throttle-gain</property>
@@ -102,7 +131,7 @@
             <fcs_function name="Throttle1">
                 <function>
                     <product>
-                        <property>fcs/throttle-cmd-norm[1]</property>
+                        <property>fcs/throttle-redist[1]</property>
                         <property>fcs/cutoff-switch1-delay</property>
                         <difference>
                             <property>fcs/throttle-gain</property>
