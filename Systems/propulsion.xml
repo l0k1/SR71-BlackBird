@@ -95,9 +95,8 @@
                     position/h-sl-ft gt 0
                 </test>
                 <output>fcs/intake-subsonic-pos</output>
-            </switch>
-
-
+            </switch>	
+			
             <fcs_function name="Throttle0">
                 <function>
                     <product>
@@ -121,7 +120,7 @@
             <summer name="Throttle0 Pos Limited">
                 <input>fcs/throttle0-pos-norm</input>
                 <clipto>
-                    <min>0.0/min>
+                    <min>0.0</min>
                     <max>2.5</max>
                 </clipto>
                 <output>fcs/throttle-pos-norm[0]</output>
