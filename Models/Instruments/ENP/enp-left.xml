@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+
+<!--
+    Usable with FlightGear
+    Property of Gerard Robin
+    Copyright License:  GPL
+-->
+<PropertyList>
+
+	<path>enp.ac</path>
+
+	<animation>
+		<type>noshadow</type>
+		<object-name>EGT</object-name>
+	</animation>
+
+
+
+
+
+	<animation>
+		<object-name>Needle</object-name>
+		<type>material</type>
+		<emission>
+			<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			<red>0.80</red>
+			<green>0.40</green>
+			<blue>0.30</blue>
+		</emission>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>01</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</specular>
+		<shininess>20</shininess>
+	</animation>
+
+	<animation>
+		<object-name>Cadran</object-name>
+		<type>material</type>
+		<emission>
+			<factor-prop>controls/lighting/instruments-norm</factor-prop>
+			<red>0.60</red>
+			<green>0.30</green>
+			<blue>0.20</blue>
+		</emission>
+		<diffuse>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</diffuse>
+		<ambient>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</ambient>
+		<specular>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+		</specular>
+		<shininess> 32</shininess>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>OFF</object-name>
+		<condition>
+			<less-than>
+				<property>/systems/electrical/outputs/instr-ignition-switch</property>
+				<value>27</value>
+			</less-than>
+		</condition>
+	</animation>
+
+<!-- lots of interpolated values, but i wanted the needle to line up exactly with the texture, as CIT is very important. -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Needle</object-name>
+		<property>/fdm/jsbsim/fcs/throttle-pos-norm[0]</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-23.7</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>-23.6</dep>
+			</entry>
+			<entry>
+				<ind>2.5</ind>
+				<dep>156.7</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+</PropertyList>
