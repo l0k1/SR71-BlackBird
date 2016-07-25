@@ -142,9 +142,13 @@
     <engines>
         <engine n="0">
                     <running>false</running>
+					<teb-shots type="int">16</teb-shots>
+					<aug-avail type="bool">true</aug-avail>
         </engine>
         <engine n="1">
                     <running>false</running>
+					<teb-shots type="int">16</teb-shots>
+					<aug-avail type="bool">true</aug-avail>
         </engine>
     </engines>
 	
@@ -241,6 +245,10 @@
 				<hdg-trk-selected type="bool">false</hdg-trk-selected>
 				<hdg-bug-only type="bool">false</hdg-bug-only>
 			</efis>
+			<teb>
+				<display n="0" type="int">16</display>
+				<display n="1" type="int">16</display>
+			</teb>
     </instrumentation>
 	
 	

@@ -88,12 +88,12 @@
             <desc>Fire Starter on Selected Engine(s)</desc>
             <binding>
                 <command>nasal</command>
-                <script>controls.startEngine(1)</script>
+                <script>sr71.start_engine(1,1)</script>
             </binding>
             <mod-up>
                 <binding>
                     <command>nasal</command>
-                    <script>controls.startEngine(1)</script>
+                    <script>sr71.start_engine(1,2)</script>
                 </binding>
             </mod-up>
         </key>

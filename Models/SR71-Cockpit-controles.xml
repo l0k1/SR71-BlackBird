@@ -245,6 +245,114 @@
 
 	<!-- teb display -->
 
+	<animation>
+		<type>textranslate</type>
+		<object-name>tebCounterLeft10</object-name>
+		<property>/instrumentation/teb/display[0]</property>
+		<bias>0.00001</bias>
+		<factor>0.01</factor>
+		<step>10</step>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>tebCounterLeft1</object-name>
+		<property>/instrumentation/teb/display[0]</property>
+		<bias>0.00001</bias>
+		<factor>0.1</factor>
+		<step>1</step>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>tebCounterRight10</object-name>
+		<property>/instrumentation/teb/display[1]</property>
+		<bias>0.00001</bias>
+		<factor>0.01</factor>
+		<step>10</step>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+		</axis>
+	</animation>
+	
+	<animation>
+		<type>textranslate</type>
+		<object-name>tebCounterRight1</object-name>
+		<property>/instrumentation/teb/display[1]</property>
+		<bias>0.00001</bias>
+		<factor>0.1</factor>
+		<step>1</step>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+		</axis>
+	</animation>
 
+	<animation>
+        <type>pick</type>
+        <object-name>tebKnobLeft</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/teb/display[0]</property>
+				<step>1</step>
+				<min>0</min>
+				<max>99</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/teb/display[0]</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>99</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+    </animation>
+	
+	<animation>
+        <type>pick</type>
+        <object-name>tebKnobRight</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/teb/display[1]</property>
+				<step>1</step>
+				<min>0</min>
+				<max>99</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<binding>
+				<command>property-adjust</command>
+				<property>/instrumentation/teb/display[1]</property>
+				<step>-1</step>
+				<min>0</min>
+				<max>99</max>
+				<wrap>true</wrap>
+			</binding>
+		</action>
+    </animation>
 
 </PropertyList>

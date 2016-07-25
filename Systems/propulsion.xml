@@ -4,7 +4,8 @@
 
 <system name="engine">
 
-        <property value="2.5">fcs/throttle-gain</property>
+        <property value="2.5">fcs/throttle-gain[0]</property>
+		<property value="2.5">fcs/throttle-gain[1]</property>
         <!--<property value="0">fcs/intake-subsonic-pos</property>-->
         <property value="0">fcs/cutoff-switch0</property>
         <property value="0">fcs/cutoff-switch1</property>
@@ -88,25 +89,16 @@
 			</fcs_function>
 			
             <!--la puissance maxi n'est disponible que sous condition-->
-            <switch name="AugThrust">
-                <default value="1"/>
-                <test  logic="AND" value="0">
-                    velocities/mach gt  0
-                    position/h-sl-ft gt 0
-                </test>
-                <output>fcs/intake-subsonic-pos</output>
-            </switch>	
 			
             <fcs_function name="Throttle0">
                 <function>
-                    <product>
-                        <property>fcs/throttle-redist[0]</property>
-                        <property>fcs/cutoff-switch0-delay</property>
-                        <difference>
-                            <property>fcs/throttle-gain</property>
-                            <property>fcs/intake-subsonic-pos</property>
-                        </difference>
-                    </product>
+						<product>
+							<property>fcs/throttle-redist[0]</property>
+							<property>fcs/cutoff-switch0-delay</property>
+							<difference>
+								<property>fcs/throttle-gain[0]</property>
+							</difference>
+						</product>
                 </function>
             </fcs_function>
 
@@ -133,8 +125,7 @@
                         <property>fcs/throttle-redist[1]</property>
                         <property>fcs/cutoff-switch1-delay</property>
                         <difference>
-                            <property>fcs/throttle-gain</property>
-                            <property>fcs/intake-subsonic-pos</property>
+                            <property>fcs/throttle-gain[1]</property>
                         </difference>
                     </product>
                 </function>

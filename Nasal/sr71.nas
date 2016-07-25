@@ -5,6 +5,9 @@ MAIN_UPDATE_TIMER = 0.3;
 SLOW_UPDATE_TIMER = 0.7;
 var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 var cit_max = 427;
+var ab_state = {};
+ab_state[0] = 0;
+ab_state[1] = 0;
 
 #path locations
 var engine_damage = ["/engines/engine[0]/eng-damage","/engines/engine[1]/eng-damage"];
@@ -29,6 +32,23 @@ var main = func () {
 	
 	#Do CIT stuff.
 	cit();
+	
+	#TEB - if n1 > 100, decrement teb. sort of
+	for ( var i = 0 ; i < 2 ; i = i + 1 ) {
+		if ( ab_state[i] == 0 ) {
+			if ( getprop("/engines/engine["~i~"]/n1") != nil and getprop("/engines/engine["~i~"]/n1") >= 100 and getprop("/engines/engine["~i~"]/aug-avail") != nil and getprop("/engines/engine["~i~"]/aug-avail") == 1 ) {
+				setprop("/engines/engine["~i~"]/teb-shots",getprop("/engines/engine["~i~"]/teb-shots") - 1);
+				setprop("/instrumentation/teb/display["~i~"]",getprop("/instrumentation/teb/display["~i~"]") - 1);
+				ab_state[i] = 1;
+				if ( getprop("/engines/engine["~i~"]/teb-shots") < 0 ) {
+					setprop("/fdm/jsbsim/fcs/throttle-gain["~i~"]",1);
+				}
+			}
+		} elsif ( ab_state[i] == 1 and getprop("/engines/engine["~i~"]/n1") != nil and getprop("/engines/engine["~i~"]/n1") < 100 ) {
+			ab_state[i] = 0;
+		}
+	}
+	
 	
 	# If traveling greater than mach 3.53, unstart the engines.
 	if ( getprop("/fdm/jsbsim/velocities/mach") > 3.53 and getprop("/fdm/jsbsim/velocities/mach") < 3.55 ) {
@@ -71,46 +91,61 @@ var cit = func () {
 }
 
 var cit_engine_damage = func (cit_temp, eng_num) {
-if ( cit_temp > cit_max ) {
-	#need to also add in when IGV is in axial - 150C is maximum - 115C is transition, 125C is maximum allowed
-	#mach 1.8
-	#want indicator light first though
-	
-	#calculate how much engine damage this should add
-	#going to use linear interpolation for this, sorry.
-	#var cit_overheat = cit_temp - cit_max;
-	if ( cit_temp < 453 ) {
-		var x1 = 428;
-		var y1 = 18000 / MAIN_UPDATE_TIMER; # 5 hours at CIT of 428
-		var x2 = 453;
-		var y2 = 2400 / MAIN_UPDATE_TIMER; # 45 minutes at CIT of 453
-	} elsif ( cit_temp < 478 ) {
-		var x1 = 453;
-		var y1 = 2400 / MAIN_UPDATE_TIMER;
-		var x2 = 478;
-		var y2 = 300 / MAIN_UPDATE_TIMER; # 5 minutes at CIT of 478
-	} elsif ( cit_temp >= 478 ) {
-		var x1 = 478;
-		var y1 = 300 / MAIN_UPDATE_TIMER;
-		var x2 = 510;
-		var y2 = 1 / MAIN_UPDATE_TIMER;
+	if ( cit_temp > cit_max ) {
+		#need to also add in when IGV is in axial - 150C is maximum - 115C is transition, 125C is maximum allowed
+		#mach 1.8
+		#want indicator light first though
+		
+		#calculate how much engine damage this should add
+		#going to use linear interpolation for this, sorry.
+		#var cit_overheat = cit_temp - cit_max;
+		if ( cit_temp < 453 ) {
+			var x1 = 428;
+			var y1 = 18000 / MAIN_UPDATE_TIMER; # 5 hours at CIT of 428
+			var x2 = 453;
+			var y2 = 2400 / MAIN_UPDATE_TIMER; # 45 minutes at CIT of 453
+		} elsif ( cit_temp < 478 ) {
+			var x1 = 453;
+			var y1 = 2400 / MAIN_UPDATE_TIMER;
+			var x2 = 478;
+			var y2 = 300 / MAIN_UPDATE_TIMER; # 5 minutes at CIT of 478
+		} elsif ( cit_temp >= 478 ) {
+			var x1 = 478;
+			var y1 = 300 / MAIN_UPDATE_TIMER;
+			var x2 = 510;
+			var y2 = 1 / MAIN_UPDATE_TIMER;
+		}
+		var value_interpolate = y1 + (cit_temp - x1) * ((y2 - y1) / (x2 - x1));
+		var damage_actual = 18000 / value_interpolate;
+		var damage_percent = damage_actual * ( 1 / 18000 );
+		setprop(engine_damage[eng_num],getprop(engine_damage[eng_num]) + damage_percent);
 	}
-	var value_interpolate = y1 + (cit_temp - x1) * ((y2 - y1) / (x2 - x1));
-	var damage_actual = 18000 / value_interpolate;
-	var damage_percent = damage_actual * ( 1 / 18000 );
-	setprop(engine_damage[eng_num],getprop(engine_damage[eng_num]) + damage_percent);
+
+	# startup procedures
+
+	# Disable engines if engine damage > 1. They melted.
+
+	if ( getprop(engine_damage[0]) >= 1 ) {
+		setprop("/sim/failure-manager/engines/engine[0]/serviceable",0);
+	}
+
+	if ( getprop(engine_damage[1]) >= 1 ) {
+		setprop("/sim/failure-manager/engines/engine[1]/serviceable",0);
+	}
 }
 
-# Disable engines if engine damage > 1. They melted.
-
-if ( getprop(engine_damage[0]) >= 1 ) {
-	setprop("/sim/failure-manager/engines/engine[0]/serviceable",0);
+var start_engine = func(v, stage) {
+	for ( var i = 0 ; i < 2 ; i = i + 1 ) {
+		if ( getprop("sim/input/selected/engine["~i~"]") == 1 ) {
+			setprop("/controls/engines/engine["~i~"]/starter",v);
+			if ( stage == 2 ) {
+				setprop("/engines/engine["~i~"]/teb-shots",getprop("/engines/engine["~i~"]/teb-shots") - 1);
+				setprop("/instrumentation/teb/display["~i~"]",getprop("/instrumentation/teb/display["~i~"]") - 1);
+			}
+		}
+	}	
 }
 
-if ( getprop(engine_damage[1]) >= 1 ) {
-	setprop("/sim/failure-manager/engines/engine[1]/serviceable",0);
-}
-}
 
 var unstart = func() {
 	setprop("/fdm/jsbsim/fcs/cutoff-switch0",0);
