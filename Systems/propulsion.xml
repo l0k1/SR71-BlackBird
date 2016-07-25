@@ -121,7 +121,7 @@
             <summer name="Throttle0 Pos Limited">
                 <input>fcs/throttle0-pos-norm</input>
                 <clipto>
-                    <min>0.1</min>
+                    <min>0.0/min>
                     <max>2.5</max>
                 </clipto>
                 <output>fcs/throttle-pos-norm[0]</output>
@@ -152,7 +152,7 @@
             <summer name="Throttle1 Pos Limited">
                 <input>fcs/throttle1-pos-norm</input>
                 <clipto>
-                    <min>0.1</min>
+                    <min>0.0</min>
                     <max>2.5</max>
                 </clipto>
                 <output>fcs/throttle-pos-norm[1]</output>
