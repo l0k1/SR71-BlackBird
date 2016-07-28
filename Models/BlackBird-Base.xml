@@ -43,7 +43,6 @@
                 <z-m>0.602178</z-m>
         </offsets>
     </model>
-
     <model>
         <name>BrakeChute</name>
         <path>Aircraft/SR71-BlackBird/Models/Brake-Chute_BB.xml</path>
@@ -205,7 +204,7 @@
     <object-name>AVTrain-Biellette</object-name>
     <object-name>AVTrain-Jambe</object-name>
     <object-name>AVTrain-Phares</object-name>
-    <property>/sim/multiplay/generic/float[0]</property>
+    <property>sim/multiplay/generic/float[0]</property>
 
     <interpolation>
         <entry>
@@ -244,7 +243,7 @@
             <object-name>AVTrain-ARPorte-Doublage</object-name>
             <object-name>AVTrain-VerinCorps</object-name>
             <object-name>AVTrain-PorteGuide</object-name>
-            <property>/sim/multiplay/generic/float[0]</property>
+            <property>sim/multiplay/generic/float[0]</property>
             <interpolation>
                     <entry>
                             <ind>0.0</ind>
@@ -279,7 +278,7 @@
     <type>rotate</type>
     <object-name>AVTrain-GPorte</object-name>
     <object-name>AVTrain-GPorte-Doublage</object-name>
-    <property>/sim/multiplay/generic/float[0]</property>
+    <property>sim/multiplay/generic/float[0]</property>
     <interpolation>
         <entry>
         <ind>0.0</ind>
@@ -314,7 +313,7 @@
         <type>rotate</type>
         <object-name>AVTrain-DPorte</object-name>
         <object-name>AVTrain-DPorte-Doublage</object-name>
-        <property>/sim/multiplay/generic/float[0]</property>
+        <property>sim/multiplay/generic/float[0]</property>
         <interpolation>
             <entry>
             <ind>0.0</ind>
@@ -391,7 +390,7 @@
     <type>rotate</type>
     <object-name>GTrain</object-name>
     <object-name>GTrain-Roue</object-name>
-    <property>/sim/multiplay/generic/float[0]</property>
+    <property>sim/multiplay/generic/float[0]</property>
     <interpolation>
         <entry>
         <ind>0.0</ind>
@@ -425,7 +424,7 @@
     <animation>
             <type>rotate</type>
             <object-name>GTrain-Verin</object-name>
-            <property>/sim/multiplay/generic/float[0]</property>
+            <property>sim/multiplay/generic/float[0]</property>
             <interpolation>
                     <entry>
                             <ind>0.0</ind>
@@ -459,7 +458,7 @@
     <animation>
             <type>rotate</type>
             <object-name>GTrain-Verin</object-name>
-            <property>/sim/multiplay/generic/float[0]</property>
+            <property>sim/multiplay/generic/float[0]</property>
             <interpolation>
                     <entry>
                             <ind>0.0</ind>
@@ -518,7 +517,7 @@
         <type>rotate</type>
         <object-name>GTrain-PorteExt</object-name>
         <object-name>GTrain-PorteExt-Doublage</object-name>
-        <property>/sim/multiplay/generic/float[0]</property>
+        <property>sim/multiplay/generic/float[0]</property>
         <interpolation>
             <entry>
             <ind>0.0</ind>
@@ -553,7 +552,7 @@
         <type>rotate</type>
         <object-name>GTrain-PorteInt</object-name>
         <object-name>GTrain-PorteInt-Doublage</object-name>
-        <property>/sim/multiplay/generic/float[0]</property>
+        <property>sim/multiplay/generic/float[0]</property>
         <interpolation>
             <entry>
             <ind>0.0</ind>
@@ -592,7 +591,7 @@
         <type>rotate</type>
         <object-name>DTrain</object-name>
         <object-name>DTrain-Roue</object-name>
-        <property>/sim/multiplay/generic/float[0]</property>
+        <property>sim/multiplay/generic/float[0]</property>
         <interpolation>
         <entry>
             <ind>0.0</ind>
@@ -626,7 +625,7 @@
     <animation>
             <type>rotate</type>
             <object-name>DTrain-Verin</object-name>
-            <property>/sim/multiplay/generic/float[0]</property>
+            <property>sim/multiplay/generic/float[0]</property>
             <interpolation>
                     <entry>
                             <ind>0.0</ind>
@@ -660,7 +659,7 @@
     <animation>
             <type>rotate</type>
             <object-name>DTrain-Verin</object-name>
-            <property>/sim/multiplay/generic/float[0]</property>
+            <property>sim/multiplay/generic/float[0]</property>
             <interpolation>
                     <entry>
                             <ind>0.0</ind>
@@ -715,7 +714,7 @@
     <type>rotate</type>
     <object-name>DTrain-PorteExt</object-name>
     <object-name>DTrain-PorteExt-Doublage</object-name>
-    <property>/sim/multiplay/generic/float[0]</property>
+    <property>sim/multiplay/generic/float[0]</property>
     <interpolation>
         <entry>
         <ind>0.0</ind>
@@ -750,7 +749,7 @@
     <type>rotate</type>
     <object-name>DTrain-PorteInt</object-name>
     <object-name>DTrain-PorteInt-Doublage</object-name>
-    <property>/sim/multiplay/generic/float[0]</property>
+    <property>sim/multiplay/generic/float[0]</property>
     <interpolation>
         <entry>
         <ind>0.0</ind>
@@ -998,3 +997,4 @@
 
 
 </PropertyList>
+
