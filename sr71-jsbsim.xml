@@ -916,7 +916,7 @@
                 <product>
                     <property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
-                    <property>/sim/multiplay/generic/float[0]</property>
+                    <property>fcs/gear-surface-position</property>
                     <value>0.0200</value>
                 </product>
             </function>
