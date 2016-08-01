@@ -9,6 +9,16 @@
         <!--<property value="0">fcs/intake-subsonic-pos</property>-->
         <property value="0">fcs/cutoff-switch0</property>
         <property value="0">fcs/cutoff-switch1</property>
+		<property value="16">propulsion/engine[0]/teb-shots</property>
+		<property value="16">propulsion/engine[1]/teb-shots</property>
+		<property value="0">fcs/aug-switch-active[0]</property>
+		<property value="0">fcs/aug-switch-active[1]</property>
+		<property value="0">fcs/aug-available[0]</property>
+		<property value="0">fcs/aug-available[1]</property>
+		<property value="1">fcs/aug-avail-switch[0]</property> <!-- you can use this property to turn the a/b off. -->
+		<property value="1">fcs/aug-avail-switch[1]</property>
+		<property value="0">fcs/aug-active[0]</property>
+		<property value="0">fcs/aug-active[1]</property>
         <channel name="Engine">
 
             <switch name="Cutoff0">
@@ -59,6 +69,69 @@
                 </traverse>
             </kinematic>
 
+			<!-- teb and afterburner -->
+			<switch name="aug-switch-active[0]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[0]/n1 ge 100
+					fcs/aug-active[0] == 0
+					propulsion/engine[0]/teb-shots ge 0
+				</test>
+			</switch>
+			
+			<switch name="aug-switch-active[1]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[1]/n1 ge 100
+					fcs/aug-active[1] == 0
+					propulsion/engine[0]/teb-shots ge 0
+				</test>
+			</switch>
+			
+			<summer name="trash/a1">
+				<input>propulsion/engine[0]/teb-shots</input>
+				<input>-fcs/aug-switch-active[0]</input>
+				<output>propulsion/engine[0]/teb-shots</output>
+			</summer>
+			
+			<summer name="trash/a2">
+				<input>propulsion/engine[1]/teb-shots</input>
+				<input>-fcs/aug-switch-active[1]</input>
+				<output>propulsion/engine[1]/teb-shots</output>
+			</summer>
+			
+			<switch name="aug-available[0]">
+				<default value="1.5"/>
+				<test logic="AND" value="0">
+					fcs/aug-avail-switch[0] == 1
+					propulsion/engine[0]/teb-shots ge 0
+				</test>
+			</switch>
+			
+			<switch name="aug-available[1]">
+				<default value="1.5"/>
+				<test logic="AND" value="0">
+					fcs/aug-avail-switch[1] == 1
+					propulsion/engine[1]/teb-shots ge 0
+				</test>
+			</switch>
+			
+			<switch name="aug-active[0]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[0]/n1 ge 100
+					propulsion/engine[0]/teb-shots ge 0
+				</test>
+			</switch>
+			
+			<switch name="aug-active[1]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[1]/n1 ge 100
+					propulsion/engine[1]/teb-shots ge 0
+				</test>
+			</switch>
+
 			
 			<!-- change throttle distribution, so that 55% is milthrust and 45% is afterburner (or something) -->
 			
@@ -88,29 +161,20 @@
 				</function>
 			</fcs_function>
 			
-            <!--la puissance maxi n'est disponible que sous condition-->
+			<!-- Throttle 0 -->
 			
             <fcs_function name="Throttle0">
                 <function>
 						<product>
 							<property>fcs/throttle-redist[0]</property>
 							<property>fcs/cutoff-switch0-delay</property>
-							<difference>
-								<property>fcs/throttle-gain[0]</property>
-							</difference>
+							<property>fcs/throttle-gain[0]</property>
 						</product>
                 </function>
             </fcs_function>
 
-            <!--on reduit les gaz pour ne pas dépasser 450 kts-->
-            <fcs_function name="Throttle0 Pos Norm">
-                <function>
-                            <property>fcs/throttle0</property>
-                </function>
-            </fcs_function>
-
             <summer name="Throttle0 Pos Limited">
-                <input>fcs/throttle0-pos-norm</input>
+                <input>fcs/throttle0</input>
                 <clipto>
                     <min>0.0</min>
                     <max>2.5</max>
@@ -118,29 +182,20 @@
                 <output>fcs/throttle-pos-norm[0]</output>
              </summer>
 
-
+			<!-- Throttle 1 -->
+			 
             <fcs_function name="Throttle1">
                 <function>
                     <product>
                         <property>fcs/throttle-redist[1]</property>
                         <property>fcs/cutoff-switch1-delay</property>
-                        <difference>
-                            <property>fcs/throttle-gain[1]</property>
-                        </difference>
+                        <property>fcs/throttle-gain[1]</property>
                     </product>
                 </function>
             </fcs_function>
 
-
-            <!--on reduit les gaz pour ne pas dépasser 450 kts-->
-            <fcs_function name="Throttle1 Pos Norm">
-                <function>
-                        <property>fcs/throttle1</property>
-                </function>
-            </fcs_function>
-
             <summer name="Throttle1 Pos Limited">
-                <input>fcs/throttle1-pos-norm</input>
+                <input>fcs/throttle1</input>
                 <clipto>
                     <min>0.0</min>
                     <max>2.5</max>
@@ -222,6 +277,7 @@
 					propulsion/engine[1]/thrust-lbs gt 2000
                 </test>
             </switch>
+		
 			
 			<!-- CIP -->
 			<!-- sorry for table mess, did it in excel -->
@@ -280,7 +336,5 @@
 
 
     </channel>
-
-
 
 </system>

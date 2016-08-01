@@ -1,7 +1,7 @@
 ### Main SR-71 File ###
 
 #Important global variables
-MAIN_UPDATE_TIMER = 0.3;
+MAIN_UPDATE_TIMER = 0.2;
 SLOW_UPDATE_TIMER = 0.7;
 var clamp = func(v, min, max) { v < min ? min : v > max ? max : v }
 var cit_max = 427;
@@ -33,18 +33,12 @@ var main = func () {
 	#Do CIT stuff.
 	cit();
 	
-	#TEB - if n1 > 100, decrement teb. sort of
+	#TEB - if throttle is over 55%, decrement teb. this is where A/B kicks in.
 	for ( var i = 0 ; i < 2 ; i = i + 1 ) {
-		if ( ab_state[i] == 0 ) {
-			if ( getprop("/engines/engine["~i~"]/n1") != nil and getprop("/engines/engine["~i~"]/n1") >= 100 and getprop("/engines/engine["~i~"]/aug-avail") != nil and getprop("/engines/engine["~i~"]/aug-avail") == 1 ) {
-				setprop("/engines/engine["~i~"]/teb-shots",getprop("/engines/engine["~i~"]/teb-shots") - 1);
-				setprop("/instrumentation/teb/display["~i~"]",getprop("/instrumentation/teb/display["~i~"]") - 1);
-				ab_state[i] = 1;
-				if ( getprop("/engines/engine["~i~"]/teb-shots") < 0 ) {
-					setprop("/fdm/jsbsim/fcs/throttle-gain["~i~"]",1);
-				}
-			}
-		} elsif ( ab_state[i] == 1 and getprop("/engines/engine["~i~"]/n1") != nil and getprop("/engines/engine["~i~"]/n1") < 100 ) {
+		if ( getprop("/controls/engines/engine["~i~"]/throttle") >= 0.55 and getprop("/instrumentation/teb/display["~i~"]" ) > 0 and ab_state[i] == 0 ) {
+			setprop("/instrumentation/teb/display["~i~"]",getprop("/instrumentation/teb/display["~i~"]") - 1);
+			ab_state[i] = 1;
+		} elsif ( getprop("/controls/engines/engine["~i~"]/throttle") <= 0.55 and ab_state[i] == 1 )  {
 			ab_state[i] = 0;
 		}
 	}
@@ -139,7 +133,7 @@ var start_engine = func(v, stage) {
 		if ( getprop("sim/input/selected/engine["~i~"]") == 1 ) {
 			setprop("/controls/engines/engine["~i~"]/starter",v);
 			if ( stage == 2 ) {
-				setprop("/engines/engine["~i~"]/teb-shots",getprop("/engines/engine["~i~"]/teb-shots") - 1);
+				setprop("/fdm/jsbsim/propulsion/engine["~i~"]/teb-shots",getprop("/fdm/jsbsim/propulsion/engine["~i~"]/teb-shots") - 1);
 				setprop("/instrumentation/teb/display["~i~"]",getprop("/instrumentation/teb/display["~i~"]") - 1);
 			}
 		}
