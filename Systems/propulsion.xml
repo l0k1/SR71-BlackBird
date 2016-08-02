@@ -4,8 +4,6 @@
 
 <system name="engine">
 
-        <property value="2.5">fcs/throttle-gain[0]</property>
-		<property value="2.5">fcs/throttle-gain[1]</property>
         <!--<property value="0">fcs/intake-subsonic-pos</property>-->
         <property value="0">fcs/cutoff-switch0</property>
         <property value="0">fcs/cutoff-switch1</property>
@@ -68,13 +66,96 @@
                     </setting>
                 </traverse>
             </kinematic>
+			
+			<!-- throttle distributions, split milthrust and augthrust -->
+			
+			<fcs_function name="throttle-redist-mil[0]">
+				<function>
+					<table>
+						<independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
+						<tableData>
+							0		0.00
+							0.55	0.40
+							1		0.40
+						</tableData>
+					</table>
+				</function>
+			</fcs_function>
+			
+			<fcs_function name="throttle-redist-mil[1]">
+				<function>
+					<table>
+						<independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
+						<tableData>
+							0		0.00
+							0.55	0.40
+							1		0.40
+						</tableData>
+					</table>
+				</function>
+			</fcs_function>
+			
+			<fcs_function name="throttle-redist-aug-predelay[0]">
+				<function>
+					<table>
+						<independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
+						<tableData>
+							0		0.00
+							0.55	0.00
+							1		1.50
+						</tableData>
+					</table>
+				</function>
+			</fcs_function>
+			
+			<kinematic name="throttle-redist-aug[0]">
+                <input>fcs/throttle-redist-aug-predelay[0]</input>
+                <traverse>
+                    <setting>
+                        <position>0.0000</position>
+                        <time>0.0000</time>
+                    </setting>
+                    <setting>
+                        <position>1.5000</position>
+                        <time>1.0000</time>
+                    </setting>
+                </traverse>
+            </kinematic>
+			
+			<fcs_function name="throttle-redist-aug-predelay[1]">
+				<function>
+					<table>
+						<independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
+						<tableData>
+							0		0.00
+							0.55	0.00
+							1		1.50
+						</tableData>
+					</table>
+				</function>
+			</fcs_function>
+			
+			<kinematic name="throttle-redist-aug[1]">
+                <input>fcs/throttle-redist-aug-predelay[1]</input>
+                <traverse>
+                    <setting>
+                        <position>0.0000</position>
+                        <time>0.0000</time>
+                    </setting>
+                    <setting>
+                        <position>1.5000</position>
+                        <time>1.0000</time>
+                    </setting>
+                </traverse>
+            </kinematic>
 
 			<!-- teb and afterburner -->
 			<switch name="aug-switch-active[0]">
 				<default value="0"/>
 				<test logic="AND" value="1">
-					propulsion/engine[0]/n1 ge 100
+					propulsion/engine[0]/n1 ge 102
 					fcs/aug-active[0] == 0
+					fcs/aug-delay[0] == 1
 					propulsion/engine[0]/teb-shots ge 0
 				</test>
 			</switch>
@@ -82,7 +163,8 @@
 			<switch name="aug-switch-active[1]">
 				<default value="0"/>
 				<test logic="AND" value="1">
-					propulsion/engine[1]/n1 ge 100
+					propulsion/engine[1]/n1 ge 102
+					fcs/aug-delay[1] == 1
 					fcs/aug-active[1] == 0
 					propulsion/engine[0]/teb-shots ge 0
 				</test>
@@ -100,26 +182,53 @@
 				<output>propulsion/engine[1]/teb-shots</output>
 			</summer>
 			
-			<switch name="aug-available[0]">
-				<default value="1.5"/>
-				<test logic="AND" value="0">
-					fcs/aug-avail-switch[0] == 1
-					propulsion/engine[0]/teb-shots ge 0
+			<switch name="aug-delay-switch[0]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[0]/n1 ge 102
 				</test>
 			</switch>
 			
-			<switch name="aug-available[1]">
-				<default value="1.5"/>
-				<test logic="AND" value="0">
-					fcs/aug-avail-switch[1] == 1
-					propulsion/engine[1]/teb-shots ge 0
+			<kinematic name="aug-delay[0]">
+                <input>fcs/aug-delay-switch[0]</input>
+                <traverse>
+                    <setting>
+                        <position>0.0000</position>
+                        <time>0.0000</time>
+                    </setting>
+                    <setting>
+                        <position>1.0000</position>
+                        <time>3.5000</time>
+                    </setting>
+                </traverse>
+            </kinematic>
+			
+			<switch name="aug-delay-switch[1]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[0]/n1 ge 102
 				</test>
 			</switch>
+			
+			<kinematic name="aug-delay[0]">
+                <input>fcs/aug-delay-switch[1]</input>
+                <traverse>
+                    <setting>
+                        <position>0.0000</position>
+                        <time>0.0000</time>
+                    </setting>
+                    <setting>
+                        <position>1.0000</position>
+                        <time>3.5000</time>
+                    </setting>
+                </traverse>
+            </kinematic>
 			
 			<switch name="aug-active[0]">
 				<default value="0"/>
 				<test logic="AND" value="1">
-					propulsion/engine[0]/n1 ge 100
+					propulsion/engine[0]/n1 ge 102
+					fcs/aug-delay[0] == 1
 					propulsion/engine[0]/teb-shots ge 0
 				</test>
 			</switch>
@@ -127,48 +236,43 @@
 			<switch name="aug-active[1]">
 				<default value="0"/>
 				<test logic="AND" value="1">
-					propulsion/engine[1]/n1 ge 100
+					propulsion/engine[1]/n1 ge 102
+					fcs/aug-delay[1] == 1
 					propulsion/engine[1]/teb-shots ge 0
 				</test>
 			</switch>
-
 			
-			<!-- change throttle distribution, so that 55% is milthrust and 45% is afterburner (or something) -->
+			<switch name="aug-available[0]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					fcs/aug-avail-switch[0] == 1
+					propulsion/engine[0]/teb-shots ge 0
+					fcs/aug-active[0] == 1
+				</test>
+			</switch>
 			
-			<fcs_function name="throttle-redist[0]">
-				<function>
-					<table>
-						<independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
-						<tableData>
-							0		0
-							0.55	0.40
-							1		1
-						</tableData>
-					</table>
-				</function>
-			</fcs_function>
-			
-			<fcs_function name="throttle-redist[1]">
-				<function>
-					<table>
-						<independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
-						<tableData>
-							0		0
-							0.55	0.40
-							1		1
-						</tableData>
-					</table>
-				</function>
-			</fcs_function>
+			<switch name="aug-available[1]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					fcs/aug-avail-switch[1] == 1
+					propulsion/engine[1]/teb-shots ge 0
+					fcs/aug-active[1] == 1
+				</test>
+			</switch>
 			
 			<!-- Throttle 0 -->
 			
             <fcs_function name="Throttle0">
                 <function>
 						<product>
-							<property>fcs/throttle-redist[0]</property>
 							<property>fcs/cutoff-switch0-delay</property>
-							<property>fcs/throttle-gain[0]</property>
+							<sum>
+								<property>fcs/throttle-redist-mil[0]</property>
+								<product>
+									<property>fcs/throttle-redist-aug[0]</property>
+									<property>fcs/aug-available[0]</property>
+								</product>
+							</sum>
 						</product>
                 </function>
             </fcs_function>
@@ -187,10 +291,15 @@
             <fcs_function name="Throttle1">
                 <function>
                     <product>
-                        <property>fcs/throttle-redist[1]</property>
-                        <property>fcs/cutoff-switch1-delay</property>
-                        <property>fcs/throttle-gain[1]</property>
-                    </product>
+						<property>fcs/cutoff-switch1-delay</property>
+						<sum>
+							<property>fcs/throttle-redist-mil[1]</property>
+							<product>
+								<property>fcs/throttle-redist-aug[1]</property>
+								<property>fcs/aug-available[1]</property>
+							</product>
+						</sum>
+					</product>
                 </function>
             </fcs_function>
 
