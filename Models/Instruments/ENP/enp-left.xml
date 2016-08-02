@@ -87,18 +87,14 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>Needle</object-name>
-		<property>/fdm/jsbsim/fcs/throttle-pos-norm[0]</property>
+		<property>/fdm/jsbsim/fcs/throttle-redist-aug[0]</property>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
 				<dep>-23.7</dep>
 			</entry>
 			<entry>
-				<ind>1</ind>
-				<dep>-23.6</dep>
-			</entry>
-			<entry>
-				<ind>2.5</ind>
+				<ind>1.5</ind>
 				<dep>156.7</dep>
 			</entry>
 		</interpolation>
