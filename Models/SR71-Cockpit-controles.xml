@@ -137,7 +137,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Throttle1-Cde</object-name>
-        <property>/controls/engines/engine[0]/throttle</property>
+        <property>/controls/engines/engine[1]/throttle</property>
         <interpolation>
                 <entry>
                 <ind>0</ind>
@@ -163,7 +163,7 @@
     <animation>
         <type>rotate</type>
         <object-name>Throttle2-Cde</object-name>
-        <property>/controls/engines/engine[1]/throttle</property>
+        <property>/controls/engines/engine[0]/throttle</property>
         <interpolation>
                 <entry>
                 <ind>0</ind>

@@ -17,6 +17,8 @@
 		<property value="1">fcs/aug-avail-switch[1]</property>
 		<property value="0">fcs/aug-active[0]</property>
 		<property value="0">fcs/aug-active[1]</property>
+		<property value="0">fcs/aug-delay[0]</property>
+		<property value="0">fcs/aug-delay[1]</property>
         <channel name="Engine">
 
             <switch name="Cutoff0">
@@ -74,9 +76,9 @@
 					<table>
 						<independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
 						<tableData>
-							0		0.00
-							0.55	0.40
-							1		0.40
+							0.00	0.00
+							0.55	1.00
+							1.00	1.00
 						</tableData>
 					</table>
 				</function>
@@ -87,9 +89,9 @@
 					<table>
 						<independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
 						<tableData>
-							0		0.00
-							0.55	0.40
-							1		0.40
+							0.00	0.00
+							0.55	1.00
+							1.00	1.00
 						</tableData>
 					</table>
 				</function>
@@ -100,9 +102,9 @@
 					<table>
 						<independentVar lookup="row">fcs/throttle-cmd-norm[0]</independentVar>
 						<tableData>
-							0		0.00
+							0.00	0.00
 							0.55	0.00
-							1		1.50
+							1.00	1.50
 						</tableData>
 					</table>
 				</function>
@@ -117,7 +119,7 @@
                     </setting>
                     <setting>
                         <position>1.5000</position>
-                        <time>1.0000</time>
+                        <time>2.0000</time>
                     </setting>
                 </traverse>
             </kinematic>
@@ -127,9 +129,9 @@
 					<table>
 						<independentVar lookup="row">fcs/throttle-cmd-norm[1]</independentVar>
 						<tableData>
-							0		0.00
+							0.00	0.00
 							0.55	0.00
-							1		1.50
+							1.00	1.50
 						</tableData>
 					</table>
 				</function>
@@ -144,43 +146,12 @@
                     </setting>
                     <setting>
                         <position>1.5000</position>
-                        <time>1.0000</time>
+                        <time>2.0000</time>
                     </setting>
                 </traverse>
             </kinematic>
 
 			<!-- teb and afterburner -->
-			<switch name="aug-switch-active[0]">
-				<default value="0"/>
-				<test logic="AND" value="1">
-					propulsion/engine[0]/n1 ge 102
-					fcs/aug-active[0] == 0
-					fcs/aug-delay[0] == 1
-					propulsion/engine[0]/teb-shots ge 0
-				</test>
-			</switch>
-			
-			<switch name="aug-switch-active[1]">
-				<default value="0"/>
-				<test logic="AND" value="1">
-					propulsion/engine[1]/n1 ge 102
-					fcs/aug-delay[1] == 1
-					fcs/aug-active[1] == 0
-					propulsion/engine[0]/teb-shots ge 0
-				</test>
-			</switch>
-			
-			<summer name="trash/a1">
-				<input>propulsion/engine[0]/teb-shots</input>
-				<input>-fcs/aug-switch-active[0]</input>
-				<output>propulsion/engine[0]/teb-shots</output>
-			</summer>
-			
-			<summer name="trash/a2">
-				<input>propulsion/engine[1]/teb-shots</input>
-				<input>-fcs/aug-switch-active[1]</input>
-				<output>propulsion/engine[1]/teb-shots</output>
-			</summer>
 			
 			<switch name="aug-delay-switch[0]">
 				<default value="0"/>
@@ -206,11 +177,11 @@
 			<switch name="aug-delay-switch[1]">
 				<default value="0"/>
 				<test logic="AND" value="1">
-					propulsion/engine[0]/n1 ge 102
+					propulsion/engine[1]/n1 ge 102
 				</test>
 			</switch>
 			
-			<kinematic name="aug-delay[0]">
+			<kinematic name="aug-delay[1]">
                 <input>fcs/aug-delay-switch[1]</input>
                 <traverse>
                     <setting>
@@ -224,12 +195,45 @@
                 </traverse>
             </kinematic>
 			
+			<switch name="aug-switch-active[0]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[0]/n1 ge 102
+					fcs/aug-delay[0] == 1
+					fcs/aug-active[0] == 0
+					propulsion/engine[0]/teb-shots ge 0
+				</test>
+			</switch>
+			
+			<switch name="aug-switch-active[1]">
+				<default value="0"/>
+				<test logic="AND" value="1">
+					propulsion/engine[1]/n1 ge 102
+					fcs/aug-delay[1] == 1
+					fcs/aug-active[1] == 0
+					propulsion/engine[1]/teb-shots ge 0
+				</test>
+			</switch>
+			
+			<summer name="trash/a1">
+				<input>propulsion/engine[0]/teb-shots</input>
+				<input>-fcs/aug-switch-active[0]</input>
+				<output>propulsion/engine[0]/teb-shots</output>
+			</summer>
+			
+			<summer name="trash/a2">
+				<input>propulsion/engine[1]/teb-shots</input>
+				<input>-fcs/aug-switch-active[1]</input>
+				<output>propulsion/engine[1]/teb-shots</output>
+			</summer>
+			
 			<switch name="aug-active[0]">
 				<default value="0"/>
 				<test logic="AND" value="1">
 					propulsion/engine[0]/n1 ge 102
 					fcs/aug-delay[0] == 1
 					propulsion/engine[0]/teb-shots ge 0
+					fcs/cutoff-switch0-delay == 1
 				</test>
 			</switch>
 			
@@ -239,6 +243,7 @@
 					propulsion/engine[1]/n1 ge 102
 					fcs/aug-delay[1] == 1
 					propulsion/engine[1]/teb-shots ge 0
+					fcs/cutoff-switch1-delay == 1
 				</test>
 			</switch>
 			
@@ -262,7 +267,7 @@
 			
 			<!-- Throttle 0 -->
 			
-            <fcs_function name="Throttle0">
+            <fcs_function name="trash/asdfp32">
                 <function>
 						<product>
 							<property>fcs/cutoff-switch0-delay</property>
@@ -275,20 +280,16 @@
 							</sum>
 						</product>
                 </function>
-            </fcs_function>
-
-            <summer name="Throttle0 Pos Limited">
-                <input>fcs/throttle0</input>
-                <clipto>
+				<clipto>
                     <min>0.0</min>
                     <max>2.5</max>
                 </clipto>
-                <output>fcs/throttle-pos-norm[0]</output>
-             </summer>
+				<output>fcs/throttle-pos-norm[0]</output>
+            </fcs_function>
 
 			<!-- Throttle 1 -->
 			 
-            <fcs_function name="Throttle1">
+            <fcs_function name="trash/asdfadfasdfasdf">
                 <function>
                     <product>
 						<property>fcs/cutoff-switch1-delay</property>
@@ -301,17 +302,12 @@
 						</sum>
 					</product>
                 </function>
-            </fcs_function>
-
-            <summer name="Throttle1 Pos Limited">
-                <input>fcs/throttle1</input>
-                <clipto>
+				<clipto>
                     <min>0.0</min>
                     <max>2.5</max>
                 </clipto>
-                <output>fcs/throttle-pos-norm[1]</output>
-             </summer>
-
+				<output>fcs/throttle-pos-norm[1]</output>
+            </fcs_function>
 
 
             <switch name="Fuel Pump0 Cmd">

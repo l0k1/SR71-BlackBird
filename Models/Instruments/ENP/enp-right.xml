@@ -87,6 +87,10 @@
 		<type>rotate</type>
 		<object-name>Needle</object-name>
 		<property>/fdm/jsbsim/fcs/throttle-redist-aug[1]</property>
+		<condition>
+			<property>fdm/jsbsim/fcs/cutoff-switch1-delay</property>
+			<value>1</value>
+		</condition>
 		<interpolation>
 			<entry>
 				<ind>0</ind>
