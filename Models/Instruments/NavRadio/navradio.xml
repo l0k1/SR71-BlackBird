@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>navradio.ac</path>
+
+   <!--
+   object list:
+   baseplate
+   freq100
+   freq10
+   freq1
+   freqDecimal
+   freq10th
+   freq100th
+   ilsButton
+   testButton
+   vorButton
+   knobLeftBottom
+   knobLeftTop
+   knobRightBottom
+   knobRightTop
+   -->
+
+</PropertyList>
