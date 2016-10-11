@@ -565,7 +565,6 @@
         </offsets>
     </model>
 	
-	<!-- CIT GOES FUCKIN HERE -->
     <model>
             <path>Aircraft/SR71-BlackBird/Models/Instruments/CIT/cit.xml</path>
             <offsets>

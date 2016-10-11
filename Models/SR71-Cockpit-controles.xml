@@ -22,7 +22,7 @@
         </condition>
     </animation>
 
-    <!--====================Droite==============================-->
+    <!--====================Right==========================-->
     <model>
         <name>Dimmer</name>
         <path>Aircraft/SR71-BlackBird/Instruments/MODULE-dimmer.xml</path>
@@ -49,6 +49,20 @@
         </offsets>
     </model>
 
+   <model>
+      <name>navradio</name>
+      <path>Aircraft/SR71-BlackBird/Models/Instruments/NavRadio/navradio.xml</path>
+      <offsets>
+         <x-m>-0.085</x-m>
+         <y-m>0.548</y-m>
+         <z-m>0.0915</z-m>
+         <roll-deg>0</roll-deg>
+         <heading-deg>270</heading-deg>
+         <pitch-deg>14.5</pitch-deg>
+      </offsets>
+   </model>
+
+
     <model>
         <name>Tacan</name>
         <path>Aircraft/SR71-BlackBird/Instruments/MODULE-tacan-bb.xml</path>
@@ -62,7 +76,7 @@
         </offsets>
     </model>
 
-    <!--====================Gauche==============================-->
+    <!--====================Left==============================-->
 
     <model>
             <path>Aircraft/SR71-BlackBird/Instruments/Poignee-Urg-bb.xml</path>
