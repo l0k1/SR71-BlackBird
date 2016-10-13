@@ -163,7 +163,7 @@
               <rolling> 120.0 </rolling>
               <side> 120.0 </side>
             </force_lag_filter>
-            <wheel_slip_filter> 120.0 </wheel_slip_filter>-->
+            <wheel_slip_filter> 120.0 </wheel_slip_filter> -->
         </contact>
         <contact type="BOGEY" name="MLG_RIGHT"> <!--gear 2-->
             <location unit="M">
