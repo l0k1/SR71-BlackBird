@@ -119,7 +119,7 @@
         <animation>
                 <type>translate</type>
                 <object-name>Roll-pilotage-indic</object-name>
-                <property>controls/flight/aileron</property>
+                <property>instrumentation/nav/heading-needle-deflection-norm</property>
                 <factor>0.025</factor>
                  <axis>
                     <x>0</x>
@@ -131,7 +131,7 @@
         <animation>
                 <type>translate</type>
                 <object-name>Pitch-pilotage-indic</object-name>
-                <property>controls/flight/elevator</property>
+                <property>instrumentation/nav/gs-needle-deflection-norm</property>
                 <factor>0.03</factor>
                 <axis>
                     <x>0</x>
