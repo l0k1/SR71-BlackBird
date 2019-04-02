@@ -18,6 +18,7 @@
         <aero>sr71-jsbsim</aero>
         <model>
             <path archive="y">Aircraft/SR71-BlackBird/Models/Blackbird-SR71B.xml</path>
+            <fallback-model-index type="int">571</fallback-model-index>
             <controls>
                 <chute>0</chute>
             </controls>
