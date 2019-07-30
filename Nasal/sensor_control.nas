@@ -77,42 +77,27 @@ var sensor_loop = func() {
 		}
 		
 		foreach(var mp; props.globals.getNode("/ai/models").getChildren("multiplayer")) {
-			if ( radar_logic.isNotBehindTerrain(mp) == 1 ) { # can be seen, is good
-				var target_lat = mp.getNode("position/latitude-deg").getValue();
-				var target_lon = mp.getNode("position/longitude-deg").getValue();
-				var target_alt = (mp.getNode("position/altitude-ft").getValue() * FT2M);
-				var target_geo = geo.Coord.new().set_latlon(target_lat, target_lon, target_alt);
-				var target_callsign = mp.getNode("callsign").getValue();
-				var target_airframe = split(".",split("/",mp.getNode("sim/model/path").getValue())[-1])[0];
-				var target_distance = my_pos.direct_distance_to(target_geo) * M2NM; #in nautical miles
-				var target_bearing = my_pos.course_to(target_geo);
-				var target_airspeed = mp.getNode("velocities/true-airspeed-kt").getValue();
-				var target_radar_bearing = target_bearing - radar_heading; #gives angle between contact and radar
-				if ( getprop(mode) == slr ) {
-					var dist_from_path = math.sin(target_radar_bearing) * target_distance; #gives how far the target is from a line extending left/right from the plane (used for radar width)
-					if ( slr_width.getValue() == "narrow" and math.abs(dist_from_path) <= 5 ) {
-						target_lat = sprintf("%0.6f",target_lat);
-						target_lon = sprintf("%0.6f",target_lon);
-						target_alt = math.round(target_alt,10);
-						target_airspeed = math.round(target_airspeed,10);
-						#print("dist_from_path for " ~ target_callsign ~ ": " ~ dist_from_path);
-						#print("radar_bearing for " ~ target_callsign ~ ": " ~ target_radar_bearing);
-						#print("target_distance for " ~ target_callsign ~ ": " ~ target_distance);
-						write_log(getprop("/sim/time/gmt") ~ "|" ~ getprop(mode) ~ "|TGT:" ~ target_airframe ~ "|CS:" ~ target_callsign ~ "|LAT:" ~ target_lat ~ "|LON:" ~ target_lon ~ "|ALT:" ~ target_alt ~ "|SPD:" ~ target_airspeed);
-					} elsif ( slr_width.getValue() == "wide" and math.abs(dist_from_path) <= 10 ) {
-						target_lat = sprintf("%0.5f",target_lat);
-						target_lon = sprintf("%0.5f",target_lon);
-						target_alt = math.round(target_alt,100);
-						target_airspeed = math.round(target_airspeed,10);
-						#print("dist_from_path for " ~ target_callsign ~ ": " ~ dist_from_path);
-						#print("radar_bearing for " ~ target_callsign ~ ": " ~ target_radar_bearing);
-						#print("target_distance for " ~ target_callsign ~ ": " ~ target_distance);
-						target_alt = sprintf("%0.3f",target_alt);
-						write_log(getprop("/sim/time/gmt") ~ "|" ~ getprop(mode) ~ "|TGT:" ~ target_airframe ~ "|CS:" ~ target_callsign ~ "|LAT:" ~ target_lat ~ "|LON:" ~ target_lon ~ "|ALT:" ~ target_alt);
-					}
-				}
-			}
+			capture_tgt(mp, my_pos, radar_heading);
 		}
+
+		foreach(var mp; props.globals.getNode("/ai/models").getChildren("tanker")){
+			capture_tgt(mp, my_pos, radar_heading);
+		}
+
+		foreach(var mp; props.globals.getNode("/ai/models").getChildren("ship")){
+			capture_tgt(mp, my_pos, radar_heading);
+		}
+
+		foreach(var mp; props.globals.getNode("/ai/models").getChildren("groundvehicle")){
+			capture_tgt(mp, my_pos, radar_heading);
+		}
+		foreach(var mp; props.globals.getNode("/ai/models").getChildren("aircraft")){
+			capture_tgt(mp, my_pos, radar_heading);
+		}
+		foreach(var mp; props.globals.getNode("/ai/models").getChildren("carrier")){
+			capture_tgt(mp, my_pos, radar_heading);
+		}
+
 		slr_exposures.setValue( slr_exposures.getValue() - 1 );
 	}
 	
@@ -122,6 +107,51 @@ var sensor_loop = func() {
 		distance_wait(slr_output_rate.getValue(), my_pos);
 	} elsif ( getprop(mode) == obc and obc_exposures.getValue() > 0 ) {
 		settimer(sensor_loop, obc_output_rate.getValue());
+	}
+}
+
+var capture_tgt = func(mp, my_pos, radar_heading) {
+	if ( radar_logic.isNotBehindTerrain(mp) == 1 ) { # can be seen, is good
+		var target_lat = mp.getNode("position/latitude-deg").getValue();
+		var target_lon = mp.getNode("position/longitude-deg").getValue();
+		var target_alt = (mp.getNode("position/altitude-ft").getValue() * FT2M);
+		var target_geo = geo.Coord.new().set_latlon(target_lat, target_lon, target_alt);
+		var target_callsign = mp.getNode("callsign").getValue();
+		if (target_callsign == nil or target_callsign == "") {
+			return;
+		}
+		if (mp.getNode("sim/model/path") == nil or mp.getNode("sim/model/path") == "") {
+			var target_airframe = "unknown";
+		}else{
+			var target_airframe = split(".",split("/",mp.getNode("sim/model/path").getValue())[-1])[0];
+		}
+		var target_distance = my_pos.direct_distance_to(target_geo) * M2NM; #in nautical miles
+		var target_bearing = my_pos.course_to(target_geo);
+		var target_airspeed = mp.getNode("velocities/true-airspeed-kt").getValue();
+		var target_radar_bearing = target_bearing - radar_heading; #gives angle between contact and radar
+		if ( getprop(mode) == slr ) {
+			var dist_from_path = math.sin(target_radar_bearing) * target_distance; #gives how far the target is from a line extending left/right from the plane (used for radar width)
+			if ( slr_width.getValue() == "narrow" and math.abs(dist_from_path) <= 5 ) {
+				target_lat = sprintf("%0.6f",target_lat);
+				target_lon = sprintf("%0.6f",target_lon);
+				target_alt = math.round(target_alt,10);
+				target_airspeed = math.round(target_airspeed,10);
+				#print("dist_from_path for " ~ target_callsign ~ ": " ~ dist_from_path);
+				#print("radar_bearing for " ~ target_callsign ~ ": " ~ target_radar_bearing);
+				#print("target_distance for " ~ target_callsign ~ ": " ~ target_distance);
+				write_log(getprop("/sim/time/gmt") ~ "|" ~ getprop(mode) ~ "|TGT:" ~ target_airframe ~ "|CS:" ~ target_callsign ~ "|LAT:" ~ target_lat ~ "|LON:" ~ target_lon ~ "|ALT:" ~ target_alt ~ "|SPD:" ~ target_airspeed);
+			} elsif ( slr_width.getValue() == "wide" and math.abs(dist_from_path) <= 10 ) {
+				target_lat = sprintf("%0.5f",target_lat);
+				target_lon = sprintf("%0.5f",target_lon);
+				target_alt = math.round(target_alt,100);
+				target_airspeed = math.round(target_airspeed,10);
+				#print("dist_from_path for " ~ target_callsign ~ ": " ~ dist_from_path);
+				#print("radar_bearing for " ~ target_callsign ~ ": " ~ target_radar_bearing);
+				#print("target_distance for " ~ target_callsign ~ ": " ~ target_distance);
+				target_alt = sprintf("%0.3f",target_alt);
+				write_log(getprop("/sim/time/gmt") ~ "|" ~ getprop(mode) ~ "|TGT:" ~ target_airframe ~ "|CS:" ~ target_callsign ~ "|LAT:" ~ target_lat ~ "|LON:" ~ target_lon ~ "|ALT:" ~ target_alt);
+			}
+		}
 	}
 }
 
