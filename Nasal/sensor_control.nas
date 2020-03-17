@@ -166,21 +166,28 @@ var distance_wait = func(rate, old_pos) {
 	#settimer(sensor_loop,1);
 }
 
+var log_out_full = "test";
+var log_count = 1;
+var ready_write = 0;
+
 var write_log = func(message) {
-	setprop("/controls/sensors/log-output/log[" ~ log_count.getValue() ~ "]",message);
-	ready_write.setValue(1);
-	log_count.setValue( log_count.getValue() + 1 );
+	log_out_full = log_out_full ~ "\n" ~ log_count ~ "|" ~ message;
+	log_count = log_count + 1;
+	ready_write = 1
 }
 
-var output_log = func() {
-	if ( getprop("/position/altitude-agl-ft") > 40 or ready_write.getValue() == 0 ) {
+var output_log = func(override = 0) {
+	if ( override == 0 and (getprop("/position/altitude-agl-ft") > 40 or ready_write == 0)) {
 		return; 
 	}
-	if ( getprop("/gear/gear[0]/wow") == 1 and getprop("/gear/gear[1]/wow") == 1 and getprop("/gear/gear[2]/wow") == 1 and getprop("/velocities/groundspeed-kt") < 5  and ready_write.getValue() == 1 ) {		
+	if ( override == 1 or (getprop("/gear/gear[0]/wow") == 1 and getprop("/gear/gear[1]/wow") == 1 and getprop("/gear/gear[2]/wow") == 1 and getprop("/velocities/groundspeed-kt") < 5  and ready_write == 1) ) {		
 		var timestamp = getprop("/sim/time/real/minute") ~ "-" ~ getprop("/sim/time/real/hour") ~ "-" ~ getprop("/sim/time/real/day") ~ "-" ~ getprop("/sim/time/real/month") ~ "-" ~ getprop("/sim/time/real/year");
-		var output_file = getprop("/sim/fg-home") ~ "/Export/SR-71/sensor_output_" ~ timestamp ~ ".xml";
-		io.write_properties( path: output_file, prop: "/controls/sensors/log-output/" );
-		ready_write.setValue(0);
+		var output_file = getprop("/sim/fg-home") ~ "/Export/SR-71_sensor_output_" ~ timestamp ~ ".txt";
+		print(output_file);
+		var file = io.open(output_file, "w+"); # open in write mode
+		io.write(file, log_out_full); # write the data
+		io.close(file); # close (and flush) the file stream
+		ready_write = 0;
 	} else {
 		settimer(output_log,1);
 	}

@@ -777,7 +777,6 @@
     <aerodynamics>
         <function name="aero/function/kCDge">
             <description>Change_in_drag_due_to_ground_effect</description>
-            <product>
                 <table>
                     <independentVar>aero/h_b-mac-ft</independentVar>
                     <tableData>
@@ -788,11 +787,9 @@
                           1.1000	1.000
                     </tableData>
                 </table>
-                </product>
             </function>
             <function name="aero/function/kCLge">
             <description>Change_in_lift_due_to_ground_effect</description>
-            <product>
                   <table>
                       <independentVar>aero/h_b-mac-ft</independentVar>
                       <tableData>
@@ -811,7 +808,6 @@
                           1.1000  1.0000
                       </tableData>
                   </table>
-            </product>
         </function>
 
         <axis name="DRAG">
@@ -1018,6 +1014,11 @@
                             0.60   0.200    0.200    0.600    0.600    0.580    0.600    0.500    0.400     0.300       0.200
                         </tableData>
                     </table>
+                    <ifthen>
+                        <property>structural/wings/serviceable</property>
+                        <value>1.0</value>
+                        <value>0.35</value>
+                    </ifthen>
                 </product>
             </function>
 
@@ -1061,6 +1062,11 @@
                                 1.5707963 4.15
                           </tableData>
                       </table>
+                    <ifthen>
+                        <property>structural/wings/serviceable</property>
+                        <value>1.0</value>
+                        <value>0.35</value>
+                    </ifthen>
                 </product>
             </function>
 
@@ -1319,37 +1325,38 @@
                     <value>-9.0000</value>
                 </product>
             </function>
-			<!--<function name="aero/coefficient/Cmaover">
+			<function name="aero/coefficient/Cmaover">
 				<description>Pitch_moment_due_to_over_alpha</description>
 				<product>
 					<property>aero/qbar-psf</property>
                     <property>metrics/Sw-sqft</property>
                     <property>metrics/cbarw-ft</property>
 					<table>
-						<independentVar lookup="row">aero/alpha-rad</independentVar>
+						<independentVar lookup="row">aero/alpha-deg</independentVar>
 						<independentVar lookup="column">velocities/mach</independentVar>
 						<tableData>
-									0		0.25	0.50	0.75	1.00	1.10	2.80	4.00	
-				0		0		0		0		0		0		0		0		0
-				0.0873	0		0		0		0		0		0		0		0
-				0.1047	0		0		0		0		0		0		0		0.05
-				0.1396	0		0		0		0		0		0		0.03	0.15
-				0.1745	0		0		0		0		0		0.03	0.08	0.30
-				0.2444	0		0		0		0.01	0.03	0.10	0.20	0.40
-				0.2618	0		0		0.03	0.05	0.12	0.15	0.23	0.50
-				0.3142	0		0.03	0.06	0.10	0.18	0.22	0.50	0.90
-				0.3665	0		0.05	0.09	0.14	0.24	0.29	0.80	1.15
-				0.4189	0		0.07	0.12	0.18	0.30	0.35	1.10	1.45
-				0.4712	0		0.09	0.15	0.22	0.36	0.42	1.50	1.85
-				0.5236	0		0.11	0.18	0.26	0.40	0.50	1.70	2.30
-				0.7854	0		0.13	0.21	0.30	0.45	0.60	2.15	2.70
-				1.0472	0		0.03	0.08	0.10	0.18	0.20	1.30	1.60
-				1.5708	0		0		0		0		0		0		0		0
+						0		0.25	0.50	0.75	1.00	1.10	2.80	4.00	
+				0.0		0		0		0		0		0		0		0		0
+				5.00	0		0		0		0		0		0		0		0
+				6.0		0		0		0		0		0		0		0		0.05
+				8.0		0		0		0		0		0		0		0.03	0.15
+				10.0	0		0		0		0		0		0.03	0.08	0.30
+				14.0	0		0		0		0.01	0.03	0.10	0.20	0.40
+				15.0	0		0		0.03	0.05	0.12	0.15	0.23	0.50
+				18.0	0		0.03	0.06	0.10	0.18	0.22	0.50	0.90
+				21.0	0		0.05	0.09	0.14	0.24	0.29	0.80	1.15
+				24.0	0		0.07	0.12	0.18	0.30	0.35	1.10	1.45
+				27.0	0		0.09	0.15	0.22	0.36	0.42	1.50	1.85
+				30.0	0		0.11	0.18	0.26	0.40	0.50	1.70	2.30
+				45.0	0		0.13	0.21	0.30	0.45	0.60	2.15	2.70
+				60.0	0		0.03	0.08	0.10	0.18	0.20	1.30	1.60
+				90.0	0		0		0		0		0		0		0		0
 							
 						</tableData>
 					</table>
+					<value>0.75</value>
 				</product>
-			</function>-->
+			</function>
         </axis>
 
         <axis name="YAW">

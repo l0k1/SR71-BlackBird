@@ -297,6 +297,7 @@
 			<nav_display>
 				<file>Aircraft/SR71-BlackBird/Models/Instruments/NavDisplay/nd.nas</file>
 			</nav_display>
+        <crashandstress>    <file>Aircraft/SR71-Blackbird/Nasal/crash-and-stress.nas</file>  </crashandstress>    <!-- plane go boom when crash -->
     </nasal>
 	
 	<!-- setting up properties for later -->
@@ -306,6 +307,11 @@
 				<fuel-pump0>0</fuel-pump0>
 				<fuel-pump1>0</fuel-pump1>
 			</fcs>
+			<structural>
+				<wings>
+					<serviceable type="bool">true</serviceable>
+				</wings>
+			</structural>
 		</jsbsim>
 	</fdm>
 
