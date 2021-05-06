@@ -60,6 +60,13 @@
 							<script>sensors.sensors_dialog.open()</script>
 						</binding>
 					</item>
+					<item n="1">
+					    <label>Event Log</label>
+					    <binding>
+						<command>dialog-show</command>
+						<dialog-name>flightlog</dialog-name>
+					    </binding>
+					</item>
 				</menu>
 			</default>
 		</menubar>
@@ -274,8 +281,28 @@
 			<offset-z-m>0</offset-z-m>
 		</refuel>
 	</systems>
+
+	<payload>
+	    <armament>
+		<models type="string">Aircraft/SR71-BlackBird/Models/Armament/</models>
+		<msg type="bool">true</msg>
+		<spectator type="bool">false</spectator>
+		<MLW-bearing type="double">0</MLW-bearing>
+		<MLW-count type="int">0</MLW-count>
+		<MLW-launcher type="string"></MLW-launcher>
+		<MAW-bearing type="double">0</MAW-bearing>
+		<MAW-active type="bool">false</MAW-active>
+		<spike type="bool">false</spike>
+		<enable-craters type="bool">true</enable-craters>
+	    </armament>
+	</payload>
 	
-    <nasal>
+	<nasal>
+	        <notifications>
+		    <file>Aircraft/SR71-BlackBird/Nasal/ArmamentNotification.nas</file>
+		    <file>Aircraft/SR71-BlackBird/Nasal/GeoBridgedTransmitter.nas</file>
+		</notifications>
+
 			<sr71>
 				<file>Aircraft/SR71-BlackBird/Nasal/sr71.nas</file>
 			</sr71>
