@@ -67,6 +67,14 @@
 						<dialog-name>flightlog</dialog-name>
 					    </binding>
 					</item>
+					<item n="2">
+					    <label>IFF channel</label>
+					    <binding>
+						<command>dialog-show</command>
+						<dialog-name>iff</dialog-name>
+					    </binding>
+					</item>
+					
 				</menu>
 			</default>
 		</menubar>
@@ -87,7 +95,9 @@
         <gear>
             <brake-parking type="double">1.0</brake-parking>
         </gear>
-
+	<iff>
+	    <channel type="int">0000</channel>
+	</iff>
         <switches>
             <landing-light type="bool">true</landing-light>
             <master-avionics type="bool">false</master-avionics>
@@ -206,6 +216,14 @@
     </autopilot>
 
     <instrumentation>
+	<iff>
+	    <power_prop type="string">instrumentation/iff/power</power_prop>
+	    <channel_prop
+		type="string">instrumentation/iff/channel</channel_prop>
+	    <channel type="int">0000</channel>
+	    <power type="bool">true</power>
+	</iff>
+	
             <wxradar>
                 <switch type="string" archive="y">ON</switch>
                 <mode-control type="int" archive="y">1</mode-control>
@@ -324,7 +342,12 @@
 			<nav_display>
 				<file>Aircraft/SR71-BlackBird/Models/Instruments/NavDisplay/nd.nas</file>
 			</nav_display>
-        <crashandstress>    <file>Aircraft/SR71-Blackbird/Nasal/crash-and-stress.nas</file>  </crashandstress>    <!-- plane go boom when crash -->
+        <crashandstress>
+	    <file>Aircraft/SR71-Blackbird/Nasal/crash-and-stress.nas</file>
+	</crashandstress>    <!-- plane go boom when crash -->
+	<iff>
+	    <file>Aircraft/SR71-BlackBird/Nasal/iff.nas</file>
+	</iff>
     </nasal>
 	
 	<!-- setting up properties for later -->
